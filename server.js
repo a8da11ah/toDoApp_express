@@ -5,6 +5,8 @@ import connectDb from './config/mongoDBconnection.js';
 import cookieParser from 'cookie-parser';
 import errorHandler from './middlewares/errorHandler.js';
 
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './config/swagger.js';
 
 
 
@@ -29,7 +31,7 @@ import apiRouter from './routes/apiRoute.js';
 // app.use('/api', (await import('./routes/apiRoute.js')).default);
 
 app.use('/api', apiRouter);
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
 
