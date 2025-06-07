@@ -5,16 +5,16 @@ import dotenv from "dotenv"
 dotenv.config()
 
 
-const generateAccessToken = (userId) => {
-    return jwt.sign({ userId },
+const generateAccessToken = (id) => {
+    return jwt.sign({ id },
        process.env.JWT_ACCESS_SECRET,
        { expiresIn: process.env.JWT_ACCESS_EXPIRES_IN || "15m" });
   };
-const generateRefreshToken = (userId) => {
+const generateRefreshToken = (id) => {
     // Generate a unique identifier for the user
     const refreshTokenId = uuidv4();
     // Generate the refresh token
-    const refreshToken = jwt.sign({ userId, refreshTokenId },
+    const refreshToken = jwt.sign({ id, refreshTokenId },
        process.env.JWT_REFRESH_SECRET, { expiresIn: process.env.JWT_REFRESH_EXPIRES_IN || "7d" });
 
     // Return the refresh token
@@ -65,4 +65,4 @@ const hashPassword = async (password) => {
   };
 
 
-  export {setRefreshTokenToCookie,generateAccessToken,generateRefreshToken,hashPassword,comparePassword}
+  export {setRefreshTokenToCookie,generateAccessToken,generateRefreshToken,hashPassword,comparePassword,setAccessTokenToCookie}

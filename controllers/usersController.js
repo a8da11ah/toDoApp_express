@@ -14,7 +14,7 @@ const getMe = async (req, res) => {
     // req.user will be populated by authMiddleware (containing user.id)
     try {
         // Retrieve user but exclude the password field for security
-        const user = await User.findById(req.user.id).select('-password');
+        const user = await User.findById(req.user.id).select('-password -__v'); // Exclude password and version key
         if (!user) {
             return res.status(404).json({ message: 'User profile not found.' });
         }

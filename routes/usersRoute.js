@@ -6,9 +6,9 @@ const usersRouter = Router();
 
 
 
-usersRouter.put("/me", updateMe); // Update user profile
-usersRouter.delete("/me",validateBody(updateUserProfileSchema), deleteMe); // Delete user profile
-usersRouter.get("/", getMe); // Get user profile (for admin or self-view)
+usersRouter.put("/me",validateBody(updateUserProfileSchema), updateMe); // Update user profile
+usersRouter.delete("/me", deleteMe); // Delete user profile
+usersRouter.get("/me", getMe); // Get user profile (for admin or self-view)
 
 
 

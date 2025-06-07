@@ -1,6 +1,7 @@
 // user.model.js (or user.schema.js)
 // const mongoose = require('mongoose');
 import mongoose from 'mongoose';
+import { hashPassword } from '../utils/authUtils.js';
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -53,7 +54,7 @@ UserSchema.pre('save', async function(next) {
     if (!this.isModified('password')) {
         return next();
     }
-    this.password = await bcrypt.hash(this.password, 10); // Hash with salt rounds
+    this.password = await hashPassword(this.password); // Hash with salt rounds
     next();
 });
 
