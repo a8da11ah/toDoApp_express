@@ -18,7 +18,7 @@ const handleCompletionStatus = (task, isCompleted) => {
 // Supports filtering by projectId, categoryId, status, priority, isCompleted, dueDate, search, pagination, and sorting
 export const getTasks = async (req, res) => {
     try {
-        const userId = req.user.id;
+        const userId = req.user._id;
         let query = { userId }; // Base query for authenticated user
 
         const {
