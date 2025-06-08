@@ -1,16 +1,22 @@
 # netlify.toml
 
 [build]
-publish = "dist"               # Required even if empty; "dist" or "public" are fine
-functions = "netlify/functions"  # This points to the folder with your function files
+  publish = "public" # Or wherever your static frontend files are (if you have them)
+  functions = "netlify/functions"
 
 [functions]
-# These modules should be bundled by Netlify, not excluded
-external_node_modules = ["express", "serverless-http"]
-node_bundler = "esbuild"  # Required if you're using ESM or want better performance
+  node_bundler = "esbuild"
+  # Add other dependencies like mongoose, etc., if they are not automatically bundled
+  external_node_modules = ["express", "serverless-http", "mongoose", "cookie-parser", "swagger-ui-express"] 
 
 [[redirects]]
-from = "/api/*"
-to = "/.netlify/functions/api/:splat"
-status = 200
-force = true  # Optional; ensures override of other rules
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api-docs/*"
+  to = "/.netlify/functions/api/:splat" # Or potentially to the root of your function
+  status = 200
+  force = true
