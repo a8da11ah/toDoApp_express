@@ -1,0 +1,16 @@
+# netlify.toml
+
+[build]
+publish = "dist"               # Required even if empty; "dist" or "public" are fine
+functions = "netlify/functions"  # This points to the folder with your function files
+
+[functions]
+# These modules should be bundled by Netlify, not excluded
+external_node_modules = ["express", "serverless-http"]
+node_bundler = "esbuild"  # Required if you're using ESM or want better performance
+
+[[redirects]]
+from = "/api/*"
+to = "/.netlify/functions/api/:splat"
+status = 200
+force = true  # Optional; ensures override of other rules
