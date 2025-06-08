@@ -28,9 +28,9 @@ const TaskSchema = new Schema({
         ref: 'User',
         required: true
     },
-    listId: {
+    projectId: {
         type: Schema.Types.ObjectId,
-        ref: 'List',
+        ref: 'Project',
         required: false // A task can be standalone (not in a specific list)
     },
     title: {
