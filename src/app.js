@@ -4,6 +4,7 @@ dotenv.config();
 import connectDb from './config/mongoDBconnection.js';
 import cookieParser from 'cookie-parser';
 import errorHandler from './middlewares/errorHandler.js';
+import cors from 'cors';
 
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './config/swagger.js';
@@ -15,7 +16,10 @@ connectDb()
 
 
 // Middleware
-
+app.use(cors({
+    origin: process.env.CORS_ORIGIN || 'http://localhost:3000', // Adjust this to your frontend URL
+    credentials: true, // Allow cookies to be sent with requests
+}));
 // allow us to access req.body in json
 app.use(express.json()) 
 
