@@ -1,6 +1,7 @@
 # netlify.toml
 
 [build]
+  command = "npm install"
   publish = "public" # Or wherever your static frontend files are (if you have them)
   functions = "netlify/functions"
 
