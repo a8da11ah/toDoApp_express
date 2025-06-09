@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourAPI - Powerful Task & Project Management API</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <nav>
+                <div class="logo">YourAPI</div>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#docs">Docs</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="https://github.com/yourusername/yourrepo" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                </ul>
+            </nav>
+            <div class="hero-content">
+                <h1>Organize Everything. Empower Your Apps.</h1>
+                <p class="tagline">A powerful, RESTful API for seamless Task & Project Management. Built for developers, designed for efficiency.</p>
+                <div class="hero-buttons">
+                    <a href="#docs" class="btn btn-primary">Get Started Now</a>
+                    <a href="#features" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="features" class="section features">
+            <div class="container">
+                <h2>Why Choose YourAPI?</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-list-check icon"></i>
+                        <h3>Comprehensive Task Management</h3>
+                        <p>Create, manage, and track tasks with detailed descriptions, due dates, priorities, statuses, and subtasks. Everything you need to keep workflows clear.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-project-diagram icon"></i>
+                        <h3>Project Organization</h3>
+                        <p>Group tasks into projects for better organization and context. Keep your related work neatly bundled and easily accessible.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-tags icon"></i>
+                        <h3>Flexible Categorization</h3>
+                        <p>Assign multiple categories to tasks for powerful filtering and cross-project visibility. Define your own categories with custom colors.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt icon"></i>
+                        <h3>Secure & Scalable</h3>
+                        <p>Built with robust security measures and designed for scalability, ensuring your data is safe and your applications perform flawlessly.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-terminal icon"></i>
+                        <h3>Developer-Friendly</h3>
+                        <p>Enjoy clean, RESTful endpoints, clear documentation, and easy integration. Spend less time on backend, more on building amazing features.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-bolt icon"></i>
+                        <h3>Fast & Reliable</h3>
+                        <p>Optimized for performance, our API provides quick response times and high availability, making your applications feel snappy and reliable.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="docs" class="section docs bg-light">
+            <div class="container">
+                <h2>API Documentation & Endpoints</h2>
+                <p class="subtitle">Start building immediately. Our comprehensive documentation guides you through every step.</p>
+                <div class="docs-content">
+                    <pre><code class="language-http">
+# Base URL
+GET /api/users/me       # User Profile
+POST /api/auth/register # Register a new user
+POST /api/auth/login    # Authenticate user
+
+# Projects
+GET /api/projects       # Get all projects (supports filters)
+POST /api/projects      # Create a new project
+GET /api/projects/{id}  # Get project by ID
+PATCH /api/projects/{id} # Update project
+DELETE /api/projects/{id} # Delete project
+
+# Categories
+GET /api/categories      # Get all categories
+POST /api/categories     # Create a new category
+GET /api/categories/{id} # Get category by ID
+PATCH /api/categories/{id} # Update category
+DELETE /api/categories/{id} # Delete category
+
+# Tasks
+GET /api/tasks          # Get all tasks (supports filters, pagination, sort)
+POST /api/tasks         # Create a new task
+GET /api/tasks/{id}     # Get task by ID
+PATCH /api/tasks/{id}   # Update task
+DELETE /api/tasks/{id}  # Delete task
+
+# Subtasks (Nested under Tasks)
+POST /api/tasks/{taskId}/subtasks             # Add a subtask
+PATCH /api/tasks/{taskId}/subtasks/{subtaskId} # Update a subtask
+DELETE /api/tasks/{taskId}/subtasks/{subtaskId} # Delete a subtask
+
+<a href="https://documenter.getpostman.com/view/YOUR_POSTMAN_COLLECTION_ID/YOUR_POSTMAN_COLLECTION_LINK" target="_blank" class="docs-link">View Full Postman Documentation &rarr;</a>
+                    </code></pre>
+                    <p class="note">**Note:** Replace `YOUR_POSTMAN_COLLECTION_ID/YOUR_POSTMAN_COLLECTION_LINK` with your actual Postman documentation link once published. You can export your Postman collection and publish it to get a public link.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <p class="subtitle">Have questions or feedback? We'd love to hear from you.</p>
+                <div class="contact-methods">
+                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:support@yourapi.com">support@yourapi.com</a></p>
+                    <p><i class="fab fa-github"></i> GitHub: <a href="https://github.com/yourusername/yourrepo" target="_blank">yourusername/yourrepo</a></p>
+                    <p class="note">For quick inquiries, feel free to open an issue on our GitHub repository!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> YourAPI. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/yourusername/yourrepo" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

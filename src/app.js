@@ -21,6 +21,7 @@ app.use(express.json())
 
 // allow us to access req.body in form data
 app.use(express.urlencoded({extended:false}))
+app.use(express.static('public')) // serve static files from the public directory
 
 
 // allow us to access cookies
