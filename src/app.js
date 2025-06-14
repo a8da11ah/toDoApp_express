@@ -15,6 +15,19 @@ import {apiReference} from '@scalar/express-api-reference';
 const app = express();
 connectDb()
 
+if (process.env.NODE_ENV !== 'production') {
+  app.use((req, res, next) => {
+    console.log(`\n--- Incoming Request ---`);
+    console.log(`Method: ${req.method}`);
+    console.log(`URL: ${req.originalUrl}`);
+    console.log(`Headers:`, req.headers);
+    console.log(`------------------------\n`);
+    next();
+  });
+  
+}
+
+
 
 // Middleware
 app.use(cors({

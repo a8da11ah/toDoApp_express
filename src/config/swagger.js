@@ -10,7 +10,7 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: "http://localhost:5000/api", // Update this to your server URL
+      url: "http://localhost:5000/", // Update this to your server URL
         description: "Development server",
     },
   ],
@@ -23,11 +23,11 @@ const swaggerDefinition = {
       },
     },
   },
-  security: [
-    {
-      bearerAuth: [],
-    },
-  ],
+  // security: [
+  //   {
+  //     // bearerAuth: [],
+  //   },
+  // ],
 };
 
 const options = {
