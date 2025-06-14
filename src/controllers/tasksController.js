@@ -43,33 +43,41 @@ export const getTasks = async (req, res) => {
 
         // --- Business Logic Validation (things Joi can't check) ---
         
+        // method 1
         // Verify project exists and belongs to user
         if (projectId) {
-            const projectExists = await Project.findOne({ 
-                _id: projectId, 
-                userId
-            });
-            if (!projectExists) {
-                return res.status(404).json({
-                    success: false,
-                    message: 'Project not found or not accessible'
-                });
-            }
-            query.ProjectId = projectId; // Note: capital P to match schema
+            // const projectExists = await Project.findOne({ 
+            //     _id: projectId, 
+            //     userId
+            // });
+
+            // if (!projectExists) {
+            //     return res.status(404).json({
+            //         success: false,
+            //         message: 'Project not found or not accessible'
+            //     });
+            // }
+            query.projectId = projectId; 
         }
+
+        // method 2
+        // if (projectId) {
+        //     query.projectId = projectId; // Directly use projectId in query
+        // }
+
 
         // Verify category exists and belongs to user
         if (categoryId) {
-            const categoryExists = await Category.findOne({ 
-                _id: categoryId, 
-                userId 
-            });
-            if (!categoryExists) {
-                return res.status(404).json({
-                    success: false,
-                    message: 'Category not found or not accessible'
-                });
-            }
+            // const categoryExists = await Category.findOne({ 
+            //     _id: categoryId, 
+            //     userId 
+            // });
+            // if (!categoryExists) {
+            //     return res.status(404).json({
+            //         success: false,
+            //         message: 'Category not found or not accessible'
+            //     });
+            // }
             query.categories = { $in: [categoryId] };
         }
 
@@ -207,7 +215,7 @@ export const getTasks = async (req, res) => {
         // --- Execute Database Queries ---
         const [tasks, totalTasks, stats] = await Promise.all([
             Task.find(query, subtaskProjection)
-                .populate('ProjectId', 'name')
+                .populate('projectId', 'name')
                 .populate('categories', 'name color')
                 .select(selectFields || undefined)
                 .sort(sortOptions)
@@ -307,42 +315,45 @@ export const getTasks = async (req, res) => {
                 hasNextPage: pageNum < Math.ceil(totalTasks / limitNum),
                 hasPrevPage: pageNum > 1
             },
-            filters: {
-                applied: Object.keys(req.query).length > 2, // More than page & limit
-                count: Object.keys(req.query).filter(key => 
-                    !['page', 'limit', 'sort', 'order', 'fields', 'includeSubtasks'].includes(key)
-                ).length
-            },
-            stats: {
-                tasks: {
-                    total: statsData.totalTasks,
-                    completed: statsData.completedTasks,
-                    overdue: statsData.overdueTasks,
-                    highPriority: statsData.highPriorityTasks,
-                    pending: statsData.pendingTasks,
-                    inProgress: statsData.inProgressTasks,
-                    completionRate: statsData.totalTasks > 0 
-                        ? Math.round((statsData.completedTasks / statsData.totalTasks) * 100) 
-                        : 0
-                },
-                subtasks: {
-                    total: statsData.totalSubtasks,
-                    completed: statsData.completedSubtasks,
-                    completionRate: statsData.totalSubtasks > 0 
-                        ? Math.round((statsData.completedSubtasks / statsData.totalSubtasks) * 100) 
-                        : 0
-                }
-            },
-            message: `Retrieved ${tasks.length} of ${totalTasks} tasks`
+            // filters: {
+            //     applied: Object.keys(req.query).length > 2, // More than page & limit
+            //     count: Object.keys(req.query).filter(key => 
+            //         !['page', 'limit', 'sort', 'order', 'fields', 'includeSubtasks'].includes(key)
+            //     ).length
+            // },
+            // // stats: {
+            //     tasks: {
+            //         total: statsData.totalTasks,
+            //         completed: statsData.completedTasks,
+            //         overdue: statsData.overdueTasks,
+            //         highPriority: statsData.highPriorityTasks,
+            //         pending: statsData.pendingTasks,
+            //         inProgress: statsData.inProgressTasks,
+            //         completionRate: statsData.totalTasks > 0 
+            //             ? Math.round((statsData.completedTasks / statsData.totalTasks) * 100) 
+            //             : 0
+            //     },
+            //     subtasks: {
+            //         total: statsData.totalSubtasks,
+            //         completed: statsData.completedSubtasks,
+            //         completionRate: statsData.totalSubtasks > 0 
+            //             ? Math.round((statsData.completedSubtasks / statsData.totalSubtasks) * 100) 
+            //             : 0
+            //     }
+            // },
+            // message: `Retrieved ${tasks.length} of ${totalTasks} tasks`
         };
 
+
+
+
         // Add debug info in development
-        // if (process.env.NODE_ENV === 'development') {
-        //     response.debug = {
-        //         query: JSON.stringify(query),
-        //         executionTime: Date.now() - (req.startTime || Date.now())
-        //     };
-        // }
+        if (process.env.NODE_ENV === 'development') {
+            response.debug = {
+                query: JSON.stringify(query),
+                executionTime: Date.now() - (req.startTime || Date.now())
+            };
+        }
 
         res.status(200).json(response);
 
