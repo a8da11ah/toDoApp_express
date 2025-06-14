@@ -8,6 +8,7 @@ import cors from 'cors';
 
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './config/swagger.js';
+import {apiReference} from '@scalar/express-api-reference';
 
 
 
@@ -38,6 +39,17 @@ import apiRouter from './routes/apiRoute.js';
 
 app.use('/api', apiRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.get('/openapi.json', (req, res) => {
+  res.json(swaggerSpec);
+});
+
+// Serve Scalar documentation
+app.use('/docs', apiReference({
+  spec: {
+    content:swaggerSpec, 
+
+  },
+}));
 
 
 

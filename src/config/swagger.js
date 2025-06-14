@@ -10,7 +10,7 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: "http://localhost:5000", // Update this to your server URL
+      url: "http://localhost:5000/api", // Update this to your server URL
         description: "Development server",
     },
   ],
@@ -31,8 +31,8 @@ const swaggerDefinition = {
 };
 
 const options = {
-  swaggerDefinition,
-  apis: ["../routes/*.js"],
+   definition: swaggerDefinition,
+  apis: ["src/routes/*.js"],
 };
 
 export const swaggerSpec = swaggerJSDoc(options);
