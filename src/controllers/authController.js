@@ -146,7 +146,7 @@ const logout = async(req, res) => {
   const clientRefreshToken = req.body.refreshToken || req.cookies.refreshToken;
 
   if (!clientRefreshToken) {
-    return res.status(200).json({ message: 'Already logged out or no token provided.' });
+    return res.status(200).json({ message: 'No refeshToken provided.' });
   }
 
   try {

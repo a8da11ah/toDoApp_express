@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: my-express-api
+    runtime: node # Or 'docker' if you're using a Dockerfile
+    plan: free # <--- This is where you specify the plan
+    buildCommand: npm install
+    startCommand: npm start
